@@ -25,9 +25,10 @@ source venv/bin/activate
 python setup.py install
 ```
 
-Until now the package can do nothing.  
-Therefore here are no commands to do stuff...
-
 ## Usage
 
-This package is no good. Don't use it in any way yet ;)
+The program can be started with:
+
+```zsh
+start-app
+```

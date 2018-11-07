@@ -28,6 +28,8 @@ setuptools.setup(
     ],
     install_requires=REQUIRED,
     entry_points={
-        'console_scripts': ['convert=pdf_converter.command_line:main'],
+        'console_scripts': [
+            'start-app=pdf_converter.gui_application:main',
+        ],
     },
 )
