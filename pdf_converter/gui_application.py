@@ -14,16 +14,12 @@ def main():
 
     def convert_file(file_path):
         converting_instance = converting_pdf.PdfConverter(file_path)
-        converting_instance.convert_2_pdf()
         converting_instance.return_errors()
-        converted_file = converting_instance.convert_markdown()
+        with filedialog.asksaveasfile(defaultextension='pdf') as output_file:
+            output_path = output_file.name
+        converting_instance.convert_2_pdf(output_path)
 
-        output_name = filedialog.asksaveasfile(
-            mode='wb',
-            defaultextension='pdf').name
-
-        # lbl.configure(text='Thank you for using busykoala konverter ;-)')
-        lbl.configure(text=output_name + ': ' + converted_file)
+        lbl.configure(text='Thank you for using busykoala converter ;-)')
         btn.destroy()
 
     def get_file_path():

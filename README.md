@@ -25,6 +25,8 @@ source venv/bin/activate
 python setup.py install
 ```
 
+This package needs cairo installed.
+
 ## Usage
 
 The program can be started with:

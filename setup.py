@@ -9,7 +9,10 @@ AUTHOR = '4teamwork'
 EMAIL = 'matthias.osswald@4teamwork.ch'
 DESCRIPTION = 'File to PDF converter'
 URL = 'https://github.com/busykoala/python_packaging'
-REQUIRED = []
+REQUIRED = [
+    'WeasyPrint==0.42.3',
+    'markdown2==2.3.6',
+]
 
 setuptools.setup(
     name=NAME,
