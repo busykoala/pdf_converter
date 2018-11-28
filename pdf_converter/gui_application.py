@@ -37,6 +37,7 @@ def main():
             title="Select file",
             filetypes=(("Markdown", "*.md"),
                        ("Word", "*.docx"),
+                       ("RestructuredText", "*.rst"),
                        ("all files", "*.*"))
         )
         if not file_path:

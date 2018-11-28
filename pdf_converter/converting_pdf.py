@@ -2,6 +2,7 @@ import mammoth
 import markdown2
 from weasyprint import HTML, CSS
 from weasyprint.fonts import FontConfiguration
+from docutils import core
 
 
 class PdfConverter(object):
@@ -18,6 +19,8 @@ class PdfConverter(object):
             self.file_format = 'Markdown'
         if file_ending == 'docx':
             self.file_format = 'Docx'
+        if file_ending == 'rst':
+            self.file_format = 'RestructuredText'
 
     def convert_2_pdf(self):
 
@@ -30,6 +33,8 @@ class PdfConverter(object):
                 self.convert_markdown(output_path)
             if self.file_format == 'Docx':
                 self.convert_docx(output_path)
+            if self.file_format == 'RestructuredText':
+                self.convert_rst(output_path)
 
     def read_file_to_bytes(self):
         with open(self.file_path, 'rb') as file_:
@@ -59,6 +64,26 @@ class PdfConverter(object):
         docx_file.close()
         font_config = FontConfiguration()
         html = HTML(string=result.value)
+        css = CSS(string='''
+        @font-face {
+        font-family: Gentium;
+        src: url(http://example.com/fonts/Gentium.otf);
+        }
+        h1 { font-family: Gentium }''', font_config=font_config)
+        html.write_pdf(
+            output_path, stylesheets=[css],
+            font_config=font_config
+        )
+
+    def convert_rst(self, output_path):
+        rst_file = self.read_file_to_bytes()
+        html_code = core.publish_string(
+            source=rst_file,
+            writer_name='html').decode()
+        result = html_code[html_code.find(
+            '<body>') + 6:html_code.find('</body>')].strip()
+        font_config = FontConfiguration()
+        html = HTML(string=result)
         css = CSS(string='''
         @font-face {
         font-family: Gentium;
