@@ -1,4 +1,5 @@
 import argparse
+from pdf_converter import converting_pdf
 
 
 def create_output_paths(output_dir, file_paths):
@@ -10,6 +11,25 @@ def create_output_paths(output_dir, file_paths):
         output_file_paths.append(output_dir + filename + '.pdf')
 
     return output_file_paths
+
+
+def convert_files_to_pdf(input_file_dirs, output_file_dirs):
+
+    for index, input_file_dir in enumerate(input_file_dirs):
+        file_instance = converting_pdf.PdfConverter(input_file_dir)
+        file_instance.set_file_format()
+
+        if not file_instance.file_format:
+            pass
+            # This could later on raise an
+            # error saying file type isn't supported.
+        else:
+            if file_instance.file_format == 'Markdown':
+                file_instance.convert_markdown(output_file_dirs[index])
+            if file_instance.file_format == 'Docx':
+                file_instance.convert_docx(output_file_dirs[index])
+            if file_instance.file_format == 'RestructuredText':
+                file_instance.convert_rst(output_file_dirs[index])
 
 
 def main():
@@ -27,3 +47,4 @@ def main():
     args = parser.parse_args()
 
     output_paths = create_output_paths(args.output_dir[0], args.file_paths)
+    convert_files_to_pdf(args.file_paths, output_paths)
