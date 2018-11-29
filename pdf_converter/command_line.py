@@ -1,5 +1,6 @@
 import argparse
 from pdf_converter import converting_pdf
+from pathlib import Path
 
 
 def create_output_paths(output_dir, file_paths):
@@ -8,7 +9,7 @@ def create_output_paths(output_dir, file_paths):
     for file_path in file_paths:
         filename_incl_ext = file_path.split('/')[-1]
         filename = filename_incl_ext.split('.')[0]
-        output_file_paths.append(output_dir + filename + '.pdf')
+        output_file_paths.append(output_dir + filename)
 
     return output_file_paths
 
@@ -24,12 +25,25 @@ def convert_files_to_pdf(input_file_dirs, output_file_dirs):
             # This could later on raise an
             # error saying file type isn't supported.
         else:
+            # check if already exists
+            file_exists = True
+            temp_file = Path(output_file_dirs[index] + '.pdf')
+            new_file_path = output_file_dirs[index]
+            while file_exists is True:
+                if not temp_file.is_file():
+                    file_exists = False
+                else:
+                    temp_file = Path(new_file_path + '_new' + '.pdf')
+                    new_file_path = new_file_path + '_new'
+                    file_exists = True
+            new_file_path = new_file_path + '.pdf'
+
             if file_instance.file_format == 'Markdown':
-                file_instance.convert_markdown(output_file_dirs[index])
+                file_instance.convert_markdown(new_file_path)
             if file_instance.file_format == 'Docx':
-                file_instance.convert_docx(output_file_dirs[index])
+                file_instance.convert_docx(new_file_path)
             if file_instance.file_format == 'RestructuredText':
-                file_instance.convert_rst(output_file_dirs[index])
+                file_instance.convert_rst(new_file_path)
 
 
 def main():
