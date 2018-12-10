@@ -1,6 +1,6 @@
 from pathlib import Path
 from tkinter import Tk, Label, filedialog, Button
-import converting_pdf
+from pdf_converter import converting_pdf
 import os
 
 
@@ -36,6 +36,7 @@ def main():
             initialdir=entry_path,
             title="Select file",
             filetypes=(("Markdown", "*.md"),
+                       ("Word", "*.docx"),
                        ("all files", "*.*"))
         )
         if not file_path:
