@@ -8,8 +8,12 @@ VERSION = '0.0.1'
 AUTHOR = '4teamwork'
 EMAIL = 'matthias.osswald@4teamwork.ch'
 DESCRIPTION = 'File to PDF converter'
-URL = 'https://github.com/busykoala/python_packaging'
-REQUIRED = []
+URL = 'https://github.com/busykoala/pdf_converter'
+REQUIRED = [
+    'WeasyPrint==0.42.3',
+    'markdown2==2.3.6',
+    'mammoth==1.4.7',
+]
 
 setuptools.setup(
     name=NAME,
