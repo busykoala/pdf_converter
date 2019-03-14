@@ -15,35 +15,34 @@ def create_output_paths(output_dir, file_paths):
 
 
 def convert_files_to_pdf(input_file_dirs, output_file_dirs):
-
     for index, input_file_dir in enumerate(input_file_dirs):
         file_instance = converting_pdf.PdfConverter(input_file_dir)
         file_instance.set_file_format()
 
-        if not file_instance.file_format:
-            pass
-            # This could later on raise an
-            # error saying file type isn't supported.
-        else:
-            # check if already exists
-            file_exists = True
-            temp_file = Path(output_file_dirs[index] + '.pdf')
-            new_file_path = output_file_dirs[index]
-            while file_exists is True:
-                if not temp_file.is_file():
-                    file_exists = False
-                else:
-                    temp_file = Path(new_file_path + '_new' + '.pdf')
-                    new_file_path = new_file_path + '_new'
-                    file_exists = True
-            new_file_path = new_file_path + '.pdf'
+        new_file_path = create_filename(file_instance, output_file_dirs, index)
 
-            if file_instance.file_format == 'Markdown':
-                file_instance.convert_markdown(new_file_path)
-            if file_instance.file_format == 'Docx':
-                file_instance.convert_docx(new_file_path)
-            if file_instance.file_format == 'RestructuredText':
-                file_instance.convert_rst(new_file_path)
+        if file_instance.file_format == 'Markdown':
+            file_instance.convert_markdown(new_file_path)
+        if file_instance.file_format == 'Docx':
+            file_instance.convert_docx(new_file_path)
+        if file_instance.file_format == 'RestructuredText':
+            file_instance.convert_rst(new_file_path)
+
+
+def create_filename(file_instance, output_file_dirs, index):
+    if file_instance.file_format:
+        # check if already exists
+        file_exists = True
+        temp_file = Path(output_file_dirs[index] + '.pdf')
+        new_file_path = output_file_dirs[index]
+        while file_exists:
+            if not temp_file.is_file():
+                file_exists = False
+            else:
+                temp_file = Path(new_file_path + '_new' + '.pdf')
+                new_file_path = new_file_path + '_new'
+                file_exists = True
+        return new_file_path + '.pdf'
 
 
 def main():
