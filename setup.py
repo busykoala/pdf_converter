@@ -34,6 +34,7 @@ setuptools.setup(
     entry_points={
         'console_scripts': [
             'start-app=pdf_converter.gui_application:main',
+            'convert=pdf_converter.command_line:main',
         ],
     },
 )
