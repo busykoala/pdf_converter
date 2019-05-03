@@ -30,3 +30,9 @@ This package needs cairo installed.
 ```zsh
 convert output-dir input-filepath [input-filepath ...]
 ```
+
+## Test
+
+```zsh
+python -m pytest
+```

@@ -10,6 +10,7 @@ EMAIL = 'matthias.osswald@4teamwork.ch'
 DESCRIPTION = 'File to PDF converter'
 URL = 'https://github.com/busykoala/pdf_converter'
 REQUIRED = [
+    'pytest==4.4.1',
     'cairocffi==1.0.0',
     'WeasyPrint==47',
     'markdown2==2.3.7',
@@ -28,7 +29,7 @@ setuptools.setup(
     url=URL,
     packages=setuptools.find_packages(),
     classifiers=[
-        "Programming Language :: Python :: 3.7.1",
+        "Programming Language :: Python :: 3.7",
         "License :: OSI Approved :: GNU GPL V3",
         "Operating System :: OS Independent",
     ],
