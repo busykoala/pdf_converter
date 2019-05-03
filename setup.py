@@ -14,6 +14,7 @@ REQUIRED = [
     'WeasyPrint==47',
     'markdown2==2.3.7',
     'mammoth==1.4.9',
+    'docutils==0.14',
 ]
 
 setuptools.setup(
