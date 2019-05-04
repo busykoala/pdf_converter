@@ -10,9 +10,11 @@ EMAIL = 'matthias.osswald@4teamwork.ch'
 DESCRIPTION = 'File to PDF converter'
 URL = 'https://github.com/busykoala/pdf_converter'
 REQUIRED = [
-    'WeasyPrint==0.42.3',
-    'markdown2==2.3.6',
-    'mammoth==1.4.7',
+    'cairocffi==1.0.0',
+    'WeasyPrint==47',
+    'markdown2==2.3.7',
+    'mammoth==1.4.9',
+    'docutils==0.14',
 ]
 
 setuptools.setup(
@@ -26,14 +28,13 @@ setuptools.setup(
     url=URL,
     packages=setuptools.find_packages(),
     classifiers=[
-        "Programming Language :: Python :: 3",
+        "Programming Language :: Python :: 3.7.1",
         "License :: OSI Approved :: GNU GPL V3",
         "Operating System :: OS Independent",
     ],
     install_requires=REQUIRED,
     entry_points={
         'console_scripts': [
-            'start-app=pdf_converter.gui_application:main',
             'convert=pdf_converter.command_line:main',
         ],
     },
