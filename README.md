@@ -34,5 +34,6 @@ convert output-dir input-filepath [input-filepath ...]
 ## Test
 
 ```zsh
+pip install -e .[test]
 python -m pytest
 ```
