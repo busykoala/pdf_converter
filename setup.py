@@ -17,6 +17,10 @@ REQUIRED = [
     'mammoth',
     'docutils',
 ]
+TEST_REQUIRE = [
+    'pytest',
+    'pytest-azurepipelines',
+]
 
 setuptools.setup(
     name=NAME,
@@ -34,6 +38,9 @@ setuptools.setup(
         "Operating System :: OS Independent",
     ],
     install_requires=REQUIRED,
+    extras_require={
+        'test': TEST_REQUIRE
+    },
     entry_points={
         'console_scripts': [
             'convert=pdf_converter.command_line:main',
