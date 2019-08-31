@@ -24,6 +24,7 @@ steps:
   displayName: 'Use Python $(python.version)'
 
 - script: |
+    sudo apt-get update && \ sudo apt-get install -y libcairo2-dev
     python -m pip install --upgrade pip
     pip install -e .[test]
   displayName: 'Install dependencies'
